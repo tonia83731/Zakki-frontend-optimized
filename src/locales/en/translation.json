@@ -67,5 +67,11 @@
     "ans_timezone_link": "here",
     "ans_comment": "Comment",
     "ans_remind": "Please send your resume to",
-    "ans_remind_2": "Email header: JOINUS: <name>/<job>"
+    "ans_remind_2": "Email header: JOINUS: <name>/<job>",
+    "form_success": "Form Submitted Successfully!",
+    "form_success_sub": "Don't forget to send your resume to ww.zakki.org",
+    "form_success_btn": "Ok, Got it!",
+    "form_failed": "Submission Failed",
+    "form_failed_sub": "Would you like to try submitting again?",
+    "form_failed_btn": "Try Again"
 }

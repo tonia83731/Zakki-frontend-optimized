@@ -73,9 +73,12 @@ export default function Header() {
             dropdownToggle ? "block" : "hidden md:block"
           }`}
         >
-          <ul className="flex flex-col md:flex-row md:space-x-8 text-white text-lg font-medium text-center">
+          <ul className="flex flex-col md:flex-row md:space-x-8 text-white md:text-green-800 text-lg font-medium text-center">
             {headerData.map((nav) => (
-              <li key={nav.id} className="py-2 hover:bg-green-800 md:py-0">
+              <li
+                key={nav.id}
+                className="py-2 hover:bg-green-800 md:hover:bg-transparent md:py-0"
+              >
                 <a href={nav.link} className="">
                   {nav.name}
                 </a>

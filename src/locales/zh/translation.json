@@ -67,5 +67,11 @@
     "ans_timezone_link": "這裡",
     "ans_comment": "留言",
     "ans_remind": "請將您的履歷寄至",
-    "ans_remind_2": "電子郵件標題：JOINUS: <name>/<job>"
+    "ans_remind_2": "電子郵件標題：JOINUS: <name>/<job>",
+    "form_success": "表單提交成功！",
+    "form_success_sub": "別忘了將您的履歷發送到 ww.zakki.org",
+    "form_success_btn": "好的，知道了！",
+    "form_failed": "提交失敗",
+    "form_failed_sub": "您想再試一次提交嗎？",
+    "form_failed_btn": "再試一次"
 }

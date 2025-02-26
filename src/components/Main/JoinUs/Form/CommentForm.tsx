@@ -1,9 +1,11 @@
 import { useTranslation } from "react-i18next";
 import DefaultInput from "../../../common/DefaultInput";
 import { IoIosWarning } from "react-icons/io";
+import { useFormContext } from "../../../../context/formContext";
 
 const CommentForm = () => {
   const { t } = useTranslation();
+  const { comment, handleInputChange } = useFormContext();
   return (
     <div className="flex flex-col gap-4">
       <div className="bg-warning text-white font-medium px-4 py-1.5 flex items-center gap-2">
@@ -31,7 +33,12 @@ const CommentForm = () => {
           rows={3}
           className="form-input overflow-x-hidden"
           placeholder={t("ans_comment")}
-        ></textarea>
+          onChange={(e) =>
+            handleInputChange("comment", "comment", e.target.value)
+          }
+        >
+          {comment}
+        </textarea>
       </DefaultInput>
     </div>
   );

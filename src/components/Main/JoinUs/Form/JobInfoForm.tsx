@@ -1,8 +1,9 @@
 import { useTranslation } from "react-i18next";
 import DefaultInput from "../../../common/DefaultInput";
-
+import { useFormContext } from "../../../../context/formContext";
 const JobInfoForm = ({ jobSelect }: { jobSelect: string }) => {
   const { t } = useTranslation();
+  const { jobInfo, handleInputChange } = useFormContext();
   const locationData = [
     {
       value: "in-person",
@@ -34,15 +35,16 @@ const JobInfoForm = ({ jobSelect }: { jobSelect: string }) => {
   ];
   return (
     <div className="flex flex-col gap-4">
-      <DefaultInput label={t("ans_job")} id="job_title" required={true}>
+      <DefaultInput label={t("ans_job")} id="job" required={true}>
         <input
-          id="job_title"
+          id="job"
           type="text"
-          name="job_title"
+          name="job"
           className="form-input"
           placeholder="Job"
           required={true}
           value={jobSelect}
+          disabled
         />
       </DefaultInput>
       <div className="flex flex-col gap-1">
@@ -60,6 +62,10 @@ const JobInfoForm = ({ jobSelect }: { jobSelect: string }) => {
                   id={data.value}
                   value={data.value}
                   key={data.value}
+                  checked={data.value === jobInfo.location}
+                  onChange={(e) =>
+                    handleInputChange("job", "location", e.target.value)
+                  }
                 />
                 <label htmlFor={data.value} className="text-sm">
                   {data.label}
@@ -84,6 +90,10 @@ const JobInfoForm = ({ jobSelect }: { jobSelect: string }) => {
                   id={data.value}
                   value={data.value}
                   key={data.value}
+                  checked={data.value === jobInfo.time}
+                  onChange={(e) =>
+                    handleInputChange("job", "time", e.target.value)
+                  }
                 />
                 <label htmlFor={data.value} className="text-sm">
                   {data.label}
@@ -102,6 +112,10 @@ const JobInfoForm = ({ jobSelect }: { jobSelect: string }) => {
             className="form-input"
             placeholder="PST"
             required={true}
+            value={jobInfo.timezone}
+            onChange={(e) =>
+              handleInputChange("job", "timezone", e.target.value.toUpperCase())
+            }
           />
         </DefaultInput>
         <div className="text-sm">
@@ -119,3 +133,6 @@ const JobInfoForm = ({ jobSelect }: { jobSelect: string }) => {
 };
 
 export default JobInfoForm;
+
+// https://docs.google.com/spreadsheets/d/1gejaoLWStRZp90gHvW3cvGFioXLV6aU8_OarKr-V0Vc/edit?gid=0#gid=0
+// https://script.google.com/macros/s/AKfycbw-NdpdUFSO9h0H8arBrhFmgBdYSVtQG6qsKpHnqSPLuJZw2YTSOHspdb3W-iEJb9JcNA/exec

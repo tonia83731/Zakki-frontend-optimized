@@ -11,21 +11,24 @@ import ProgramPage from "./pages/ProgramPage";
 import JoinUsPage from "./pages/JoinUsPage";
 import EventsPage from "./pages/EventsPage";
 import EventPage from "./pages/EventPage";
+import { FormProvider } from "./context/formContext.tsx";
 
 function App() {
   return (
     <div id="app" className="min-h-screen flex flex-col">
       <Header />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/stories" element={<StoriesPage />} />
-          <Route path="/programs" element={<ProgramsPage />} />
-          <Route path="/programs/:slug" element={<ProgramPage />} />
-          <Route path="/joinus" element={<JoinUsPage />} />
-          <Route path="/events" element={<EventsPage />} />
-          <Route path="/events/:slug" element={<EventPage />} />
-        </Routes>
+        <FormProvider>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/stories" element={<StoriesPage />} />
+            <Route path="/programs" element={<ProgramsPage />} />
+            <Route path="/programs/:slug" element={<ProgramPage />} />
+            <Route path="/joinus" element={<JoinUsPage />} />
+            <Route path="/events" element={<EventsPage />} />
+            <Route path="/events/:slug" element={<EventPage />} />
+          </Routes>
+        </FormProvider>
       </BrowserRouter>
       <Footer />
     </div>

@@ -67,5 +67,11 @@
     "ans_timezone_link": "di sini",
     "ans_comment": "Komentar",
     "ans_remind": "Silakan kirim resume Anda ke",
-    "ans_remind_2": "Judul email: JOINUS: <name>/<job>"
+    "ans_remind_2": "Judul email: JOINUS: <name>/<job>",
+    "form_success": "Formulir Berhasil Dikirim!",
+    "form_success_sub": "Jangan lupa untuk mengirimkan resume Anda ke ww.zakki.org",
+    "form_success_btn": "Oke, Sudah Tahu!",
+    "form_failed": "Pengiriman Gagal",
+    "form_failed_sub": "Apakah Anda ingin mencoba mengirimkan lagi?",
+    "form_failed_btn": "Coba Lagi"
 }
