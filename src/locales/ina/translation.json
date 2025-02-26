@@ -73,5 +73,12 @@
     "form_success_btn": "Oke, Sudah Tahu!",
     "form_failed": "Pengiriman Gagal",
     "form_failed_sub": "Apakah Anda ingin mencoba mengirimkan lagi?",
-    "form_failed_btn": "Coba Lagi"
+    "form_failed_btn": "Coba Lagi",
+    "caution": "PERINGATAN",
+    "caution_text": "Karena pembatasan pemerintah, ZAKKI Org. saat ini hanya dapat menerima donasi lokal.",
+    "caution_text_2": "Jika Anda ingin melanjutkan proses donasi, silakan isi informasi di bawah ini, dan kami akan mengirimkan detail akun untuk proses lebih lanjut. Terima kasih atas pengertian dan dukungan Anda.",
+    "donate_price": "Harga",
+    "cancel": "Batal",
+    "donate_submit": "Formulir Donasi Berhasil Dikirim!",
+  "donate_submit_sub": "Kami akan segera mengirimkan informasi rekening transfer ke email Anda."
 }

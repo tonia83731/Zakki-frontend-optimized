@@ -73,5 +73,12 @@
     "form_success_btn": "Ok, Got it!",
     "form_failed": "Submission Failed",
     "form_failed_sub": "Would you like to try submitting again?",
-    "form_failed_btn": "Try Again"
+    "form_failed_btn": "Try Again",
+    "caution": "CAUTION",
+    "caution_text": "Due to government restrictions, ZAKKI Org. is currently only able to accept local donations.",
+    "caution_text_2": "If you wish to proceed with your donation, please fill in the information below, and we will send you the account details for further processing. Thank you for your understanding and support.",
+    "donate_price": "Price",
+    "cancel" : "Cancel",
+    "doate_submit": "Donate Form Submitted Successfully!",
+    "donate_submit_sub": "We will promptly send the transfer account details to your email."
 }

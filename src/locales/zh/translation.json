@@ -73,5 +73,12 @@
     "form_success_btn": "好的，知道了！",
     "form_failed": "提交失敗",
     "form_failed_sub": "您想再試一次提交嗎？",
-    "form_failed_btn": "再試一次"
+    "form_failed_btn": "再試一次",
+    "caution": "警告",
+    "caution_text": "由於政府限制，ZAKKI Org. 目前僅能接受本地捐款。",
+    "caution_text_2": "如果您希望繼續捐款，請填寫下面的資料，我們將會發送帳戶資訊以便進一步處理。感謝您的理解與支持。",
+    "donate_price": "金額",
+    "cancel": "取消",
+    "donate_submit": "捐款表單提交成功！",
+    "donate_submit_sub": "我們將會立即將轉帳帳戶資訊發送至您的電子郵件。"
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { client } from "../lib/sanity";
 import { Link, useParams } from "react-router-dom";
 
@@ -15,6 +16,10 @@ import TwitterIcon from "../assets/Img/social/twitter.png";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoIosTime } from "react-icons/io";
 import dayjs from "dayjs";
+import DonateModal, {
+  DonateInputType,
+} from "../components/Main/Program/DonateModal";
+import Swal from "sweetalert2";
 
 type SocialType = "email" | "facebook" | "linkedin" | "instagram" | "twitter";
 
@@ -66,6 +71,15 @@ export default function ProgramPage() {
   const [programData, setProgramData] = useState<ProgramType | null>(null);
   const [progress, setProgress] = useState<number>(0);
   const [eventsData, setEventsData] = useState<EventType[]>([]);
+  const [modalToggle, setModalToggle] = useState({
+    status: false,
+    text: "",
+  });
+  const [donateValue, setDonateValue] = useState({
+    fullName: "",
+    email: "",
+    price: 0,
+  });
 
   const socailMatch: Record<SocialType, string> = {
     email: EmailIcon,
@@ -73,6 +87,38 @@ export default function ProgramPage() {
     linkedin: LinkedInIcon,
     instagram: InstagramIcon,
     twitter: TwitterIcon,
+  };
+
+  const handleDonationToggle = (title: string) => {
+    setModalToggle({
+      status: true,
+      text: title,
+    });
+  };
+
+  const handleDonateInputChange = (name: keyof DonateInputType, value: any) => {
+    setDonateValue((prev) => ({ ...prev, [name]: [value] }));
+  };
+
+  const handleDonateCancel = () => {
+    setDonateValue({
+      fullName: "",
+      email: "",
+      price: 0,
+    });
+    setModalToggle({
+      status: false,
+      text: "",
+    });
+  };
+  const handleDonateSubmit = () => {
+    Swal.fire({
+      title: `${t("donate_submit")}`,
+      text: `${t("donate_submit_sub")}`,
+      icon: "success",
+      confirmButtonText: `${t("form_success_btn")}`,
+    });
+    handleDonateCancel();
   };
 
   useEffect(() => {
@@ -216,7 +262,10 @@ export default function ProgramPage() {
                 </div>
               </div>
             </div>
-            <button className="bg-primary text-white w-full py-1 rounded-md hover:bg-green-800 hover:shadow-md">
+            <button
+              onClick={() => handleDonationToggle(programData?.title as string)}
+              className="bg-primary text-white w-full py-1 rounded-md hover:bg-green-800 hover:shadow-md"
+            >
               {t("donate")}
             </button>
           </div>
@@ -371,11 +420,24 @@ export default function ProgramPage() {
               </div>
             </div>
           </div>
-          <button className="bg-primary text-white w-full py-1 rounded-md hover:bg-green-800 hover:shadow-md">
+          <button
+            onClick={() => handleDonationToggle(programData?.title as string)}
+            className="bg-primary text-white w-full py-1 rounded-md hover:bg-green-800 hover:shadow-md"
+          >
             {t("donate")}
           </button>
         </div>
       </section>
+      {modalToggle.status && (
+        <DonateModal
+          onModalClose={handleDonateCancel}
+          title={modalToggle.text}
+          inputValue={donateValue}
+          onInputChange={handleDonateInputChange}
+          onDonateCancel={handleDonateCancel}
+          onDonateSubmit={handleDonateSubmit}
+        />
+      )}
     </PageContainer>
   );
 }
