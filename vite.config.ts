@@ -15,4 +15,5 @@ export default defineConfig({
       include: "**/*.svg",
     }),
   ],
+  base: "/Zakki-frontend-optimized/",
 });
