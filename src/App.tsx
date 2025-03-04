@@ -16,9 +16,9 @@ import { FormProvider } from "./context/formContext.tsx";
 function App() {
   return (
     <div id="app" className="min-h-screen flex flex-col">
-      <Header />
       <BrowserRouter>
         <FormProvider>
+          <Header />
           <Routes>
             <Route path="/Zakki-frontend-optimized/" element={<HomePage />} />
             <Route
@@ -46,9 +46,9 @@ function App() {
               element={<EventPage />}
             />
           </Routes>
+          <Footer />
         </FormProvider>
       </BrowserRouter>
-      <Footer />
     </div>
   );
 }

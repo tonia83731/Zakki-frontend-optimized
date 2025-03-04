@@ -17,11 +17,18 @@ const resources = {
 };
 
 const searchParams = new URLSearchParams(window.location.search);
-const language = searchParams.get("language") || "en";
+const storedLanguage = localStorage.getItem("language");
+const urlLanguage = searchParams.get("language");
+const defaultLanguage = storedLanguage || urlLanguage || "en";
+
+// Save to `localStorage` if not already set
+if (!storedLanguage) {
+  localStorage.setItem("language", defaultLanguage);
+}
 
 i18n.use(initReactI18next).init({
   resources,
-  lng: language, // Set the default language
+  lng: defaultLanguage, // Set the default language
   fallbackLng: "en",
   keySeparator: false, // Allow for nested translations without using dots
   interpolation: {
