@@ -328,7 +328,7 @@ export default function ProgramPage() {
                   {eventsData.map((item, index) => {
                     return (
                       <Link
-                        to={`/event/${item.slug}`}
+                        to={`/Zakki-frontend-optimized/event/${item.slug}`}
                         key={item.slug}
                         className={`sm:grid sm:grid-cols-[60px_1fr] sm:gap-4 w-full ${
                           index !== 0 &&

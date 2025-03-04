@@ -147,7 +147,7 @@ export default function ProgramsPage() {
               return (
                 <Link
                   key={item.slug}
-                  to={`/programs/${item.slug}`}
+                  to={`/Zakki-frontend-optimized/programs/${item.slug}`}
                   className="relative overflow-hidden group"
                 >
                   <img
