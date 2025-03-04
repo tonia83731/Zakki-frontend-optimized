@@ -223,7 +223,7 @@ export default function EventsPage() {
                 {eventData.map((event, index) => {
                   return (
                     <Link
-                      to={`/event/${event.slug}`}
+                      to={`/events/${event.slug}`}
                       className={`flex flex-col gap-2 py-1 bg-white hover:bg-primary_20 hover:px-4 ${
                         index !== 0 &&
                         "border-t-2 border-green-800 border-dotted"

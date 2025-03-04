@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -16,9 +16,10 @@ import { FormProvider } from "./context/formContext.tsx";
 function App() {
   return (
     <div id="app" className="min-h-screen flex flex-col">
-      <BrowserRouter basename="/Zakki-frontend-optimized/">
+      <HashRouter>
         <FormProvider>
           <Header />
+          <div className="">Hello</div>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/stories" element={<StoriesPage />} />
@@ -30,7 +31,7 @@ function App() {
           </Routes>
           <Footer />
         </FormProvider>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
