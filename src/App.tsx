@@ -20,31 +20,13 @@ function App() {
         <FormProvider>
           <Header />
           <Routes>
-            <Route path="/Zakki-frontend-optimized/" element={<HomePage />} />
-            <Route
-              path="/Zakki-frontend-optimized/stories"
-              element={<StoriesPage />}
-            />
-            <Route
-              path="/Zakki-frontend-optimized/programs"
-              element={<ProgramsPage />}
-            />
-            <Route
-              path="/Zakki-frontend-optimized/programs/:slug"
-              element={<ProgramPage />}
-            />
-            <Route
-              path="/Zakki-frontend-optimized/joinus"
-              element={<JoinUsPage />}
-            />
-            <Route
-              path="/Zakki-frontend-optimized/events"
-              element={<EventsPage />}
-            />
-            <Route
-              path="/Zakki-frontend-optimized/events/:slug"
-              element={<EventPage />}
-            />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/stories" element={<StoriesPage />} />
+            <Route path="/programs" element={<ProgramsPage />} />
+            <Route path="/programs/:slug" element={<ProgramPage />} />
+            <Route path="/joinus" element={<JoinUsPage />} />
+            <Route path="/events" element={<EventsPage />} />
+            <Route path="/events/:slug" element={<EventPage />} />
           </Routes>
           <Footer />
         </FormProvider>
