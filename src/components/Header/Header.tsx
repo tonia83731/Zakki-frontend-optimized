@@ -2,6 +2,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import HeaderLogo from "../../assets/logo/logo-main.png";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { Link } from "react-router-dom";
 
 const languages = [
   { label: "ENG", value: "en", isDefault: true },
@@ -18,17 +19,17 @@ export default function Header() {
     {
       id: 2,
       name: `${t("nav_programs")}`,
-      link: "/Zakki-frontend-optimized/programs",
+      link: "/programs",
     },
     {
       id: 3,
       name: `${t("nav_events")}`,
-      link: "/Zakki-frontend-optimized/events",
+      link: "/events",
     },
     {
       id: 4,
       name: `${t("nav_join")}`,
-      link: "/Zakki-frontend-optimized/joinus",
+      link: "/joinus",
     },
   ];
 
@@ -83,9 +84,9 @@ export default function Header() {
                 key={nav.id}
                 className="py-2 hover:bg-green-800 md:hover:bg-transparent md:py-0"
               >
-                <a href={nav.link} className="">
+                <Link to={`/Zakki-frontend-optimized${nav.link}`}>
                   {nav.name}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

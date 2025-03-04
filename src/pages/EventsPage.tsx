@@ -196,7 +196,7 @@ export default function EventsPage() {
                         </div>
                         <div className="w-full flex justify-end">
                           <Link
-                            to={`/events/${event.slug}`}
+                            to={`/Zakki-frontend-optimized/events/${event.slug}`}
                             className="px-4 py-1 bg-primary text-white hover:shadow-md rounded-md"
                           >
                             {t("more")}
