@@ -64,7 +64,7 @@ export default function Header() {
           <GiHamburgerMenu size={24} />
         </button>
         <div className="">
-          <a href="/">
+          <a href="/Zakki-frontend-optimized/">
             <img
               src={HeaderLogo}
               alt="Logo"
@@ -84,7 +84,7 @@ export default function Header() {
                 key={nav.id}
                 className="py-2 hover:bg-green-800 md:hover:bg-transparent md:py-0"
               >
-                <Link to={`${nav.link}`} className="">
+                <Link to={`/Zakki-frontend-optimized${nav.link}`} className="">
                   {nav.name}
                 </Link>
               </li>
