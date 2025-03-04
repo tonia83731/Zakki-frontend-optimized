@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import HeaderLogo from "../../assets/logo/logo-main.svg";
+import HeaderLogo from "../../assets/logo/logo-main.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 const languages = [
@@ -63,8 +63,12 @@ export default function Header() {
           <GiHamburgerMenu size={24} />
         </button>
         <div className="">
-          <a href="/" className="w-fit">
-            <HeaderLogo className="w-full h-auto max-w-[150px]" />
+          <a href="/">
+            <img
+              src={HeaderLogo}
+              alt="Logo"
+              className="w-full h-auto max-w-[150px]"
+            />
           </a>
         </div>
 
