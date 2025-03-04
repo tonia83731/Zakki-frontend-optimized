@@ -86,7 +86,7 @@ export default function HomeCarousel() {
                   {item.link.map((item, index) => {
                     return (
                       <Link
-                        to={item.url}
+                        to={`/Zakki-frontend-optimized${item.url}`}
                         key={`home-link-${index}`}
                         className="text-center"
                       >

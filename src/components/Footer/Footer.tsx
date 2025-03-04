@@ -16,7 +16,7 @@ export default function Footer() {
     {
       id: 2,
       name: `${t("footer_volunteer")}`,
-      herf: "/ZAKKI-vite/joinus",
+      herf: "/Zakki-frontend-optimized/joinus",
       href: "#",
     },
     {

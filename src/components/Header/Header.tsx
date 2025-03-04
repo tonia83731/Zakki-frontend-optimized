@@ -18,17 +18,17 @@ export default function Header() {
     {
       id: 2,
       name: `${t("nav_programs")}`,
-      link: "/programs",
+      link: "/Zakki-frontend-optimized/programs",
     },
     {
       id: 3,
       name: `${t("nav_events")}`,
-      link: "/events",
+      link: "/Zakki-frontend-optimized/events",
     },
     {
       id: 4,
       name: `${t("nav_join")}`,
-      link: "/joinus",
+      link: "/Zakki-frontend-optimized/joinus",
     },
   ];
 
@@ -63,7 +63,7 @@ export default function Header() {
           <GiHamburgerMenu size={24} />
         </button>
         <div className="">
-          <a href="/">
+          <a href="/Zakki-frontend-optimized/">
             <img
               src={HeaderLogo}
               alt="Logo"
