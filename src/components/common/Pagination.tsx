@@ -14,8 +14,7 @@ export function Pagination({
 }: PaginationProps) {
   const pageItem = data.map((page: number) => {
     return (
-      <a
-        href="#"
+      <button
         key={page}
         className={`w-8 h-8 inline-flex items-center justify-center text-neutral-900 hover:bg-green-200 rounded-lg ${
           currentPage === page
@@ -25,26 +24,24 @@ export function Pagination({
         onClick={() => onPageClick(page)}
       >
         {page}
-      </a>
+      </button>
     );
   });
   return (
     <div className="pt-4 flex justify-center items-center text-base">
-      <a
-        href="#"
+      <button
         className="w-8 h-8 inline-flex items-center justify-center text-neutral-900 hover:bg-green-200 rounded-lg"
         onClick={() => onArrowClick("prev")}
       >
         &laquo;
-      </a>
+      </button>
       {pageItem}
-      <a
-        href="#"
+      <button
         className="w-8 h-8 inline-flex items-center justify-center text-neutral-900 hover:bg-green-200 rounded-lg"
         onClick={() => onArrowClick("next")}
       >
         &raquo;
-      </a>
+      </button>
     </div>
   );
 }
