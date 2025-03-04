@@ -186,15 +186,12 @@ export default function ProgramPage() {
       >
         <div className="flex flex-col gap-8">
           <div className="flex items-center gap-2 text-dark_60 text-xs md:text-base">
-            <Link
-              to="/Zakki-frontend-optimized/programs"
-              className="hover:font-medium hover:underline"
-            >
+            <Link to="/programs" className="hover:font-medium hover:underline">
               {t("nav_programs")}
             </Link>
             <p>/</p>
             <Link
-              to={`/Zakki-frontend-optimized/programs/${slug}`}
+              to={`/programs/${slug}`}
               className="hover:font-medium underline"
             >
               {programData?.title}
@@ -331,7 +328,7 @@ export default function ProgramPage() {
                   {eventsData.map((item, index) => {
                     return (
                       <Link
-                        to={`/Zakki-frontend-optimized/event/${item.slug}`}
+                        to={`/event/${item.slug}`}
                         key={item.slug}
                         className={`sm:grid sm:grid-cols-[60px_1fr] sm:gap-4 w-full ${
                           index !== 0 &&
@@ -374,13 +371,13 @@ export default function ProgramPage() {
 
           <div className="flex flex-col gap-2 sm:grid md:grid-cols-2 md:gap-4">
             <Link
-              to="/Zakki-frontend-optimized/events"
+              to="/events"
               className="w-full py-1 text-center fond-medium border-2 border-green-800 rounded-md text-green-800 hover:bg-green-800 hover:text-white"
             >
               {t("more_event")}
             </Link>
             <Link
-              to="/Zakki-frontend-optimized/joinus"
+              to="/joinus"
               className="w-full py-1 text-center fond-medium border-2 border-green-800 rounded-md text-green-800 hover:bg-green-800 hover:text-white"
             >
               {t("join_us")}

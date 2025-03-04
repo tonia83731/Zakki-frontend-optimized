@@ -196,7 +196,7 @@ export default function EventsPage() {
                         </div>
                         <div className="w-full flex justify-end">
                           <Link
-                            to={`/Zakki-frontend-optimized/events/${event.slug}`}
+                            to={`/events/${event.slug}`}
                             className="px-4 py-1 bg-primary text-white hover:shadow-md rounded-md"
                           >
                             {t("more")}
@@ -223,7 +223,7 @@ export default function EventsPage() {
                 {eventData.map((event, index) => {
                   return (
                     <Link
-                      to={`/Zakki-frontend-optimized/event/${event.slug}`}
+                      to={`/event/${event.slug}`}
                       className={`flex flex-col gap-2 py-1 bg-white hover:bg-primary_20 hover:px-4 ${
                         index !== 0 &&
                         "border-t-2 border-green-800 border-dotted"
