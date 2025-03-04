@@ -83,7 +83,10 @@ export default function Header() {
                 key={nav.id}
                 className="py-2 hover:bg-green-800 md:hover:bg-transparent md:py-0"
               >
-                <a href={`/Zakki-frontend-optimized${nav.link}`} className="">
+                <a
+                  href={`https://tonia83731.github.io/Zakki-frontend-optimized${nav.link}`}
+                  className=""
+                >
                   {nav.name}
                 </a>
               </li>
