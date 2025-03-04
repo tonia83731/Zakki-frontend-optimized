@@ -186,16 +186,19 @@ export default function ProgramPage() {
       >
         <div className="flex flex-col gap-8">
           <div className="flex items-center gap-2 text-dark_60 text-xs md:text-base">
-            <a href="/programs" className="hover:font-medium hover:underline">
+            <Link
+              to="/Zakki-frontend-optimized/programs"
+              className="hover:font-medium hover:underline"
+            >
               {t("nav_programs")}
-            </a>
+            </Link>
             <p>/</p>
-            <a
-              href={`/programs/${slug}`}
+            <Link
+              to={`/Zakki-frontend-optimized/programs/${slug}`}
               className="hover:font-medium underline"
             >
               {programData?.title}
-            </a>
+            </Link>
           </div>
           {/* image */}
           <div className="grid grid-cols-[2fr_1fr] gap-4">
@@ -370,18 +373,18 @@ export default function ProgramPage() {
           </div>
 
           <div className="flex flex-col gap-2 sm:grid md:grid-cols-2 md:gap-4">
-            <a
-              href="/event"
+            <Link
+              to="/Zakki-frontend-optimized/events"
               className="w-full py-1 text-center fond-medium border-2 border-green-800 rounded-md text-green-800 hover:bg-green-800 hover:text-white"
             >
               {t("more_event")}
-            </a>
-            <a
-              href="/joinus"
+            </Link>
+            <Link
+              to="/Zakki-frontend-optimized/joinus"
               className="w-full py-1 text-center fond-medium border-2 border-green-800 rounded-md text-green-800 hover:bg-green-800 hover:text-white"
             >
               {t("join_us")}
-            </a>
+            </Link>
           </div>
         </div>
         {/* donate card */}

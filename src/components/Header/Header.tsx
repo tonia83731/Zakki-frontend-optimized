@@ -2,7 +2,6 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import HeaderLogo from "../../assets/logo/logo-main.png";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { Link } from "react-router-dom";
 
 const languages = [
   { label: "ENG", value: "en", isDefault: true },
@@ -84,9 +83,9 @@ export default function Header() {
                 key={nav.id}
                 className="py-2 hover:bg-green-800 md:hover:bg-transparent md:py-0"
               >
-                <Link to={`/Zakki-frontend-optimized${nav.link}`}>
+                <a href={`/Zakki-frontend-optimized${nav.link}`} className="">
                   {nav.name}
-                </Link>
+                </a>
               </li>
             ))}
           </ul>
