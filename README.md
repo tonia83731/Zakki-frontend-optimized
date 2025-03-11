@@ -65,3 +65,23 @@ Presently, ZAKKI has made the decision to redesign its website with the aim of g
 
 - For event applications, ZAKKI currently uses Google Forms to save data. We are still discussing whether to switch to using Google API, similar to the Join Us page.
 - Due to privacy and security concerns, donations currently only support local bank transfers. In the future, we will consider integrating credit card payment functionality to offer more donation options
+
+## Project Setup
+
+1. Clone project to local
+
+```sh
+git clone https://github.com/tonia83731/Zakki-frontend-optimized.git
+```
+
+2. Install package
+
+```sh
+npm install
+```
+
+3. Run dev
+
+```sh
+npm run dev
+```
