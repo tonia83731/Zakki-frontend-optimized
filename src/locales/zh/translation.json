@@ -2,6 +2,7 @@
     "nav_programs": "ZAKKI專案",
     "nav_events": "相關活動",
     "nav_join": "加入我們",
+    "nav_news": "最新消息",
     "about": "關於我們",
     "about_description": "ZAKKI 旨在通過慈善和捐款幫助老年人，ZAKKI 的基礎理念是每個人都有平等的權利過上體面的生活。",
     "about_elderly": "老年人",
@@ -12,6 +13,10 @@
     "subscribe_btn": "確認",
     "program": "我們的計劃",
     "program_subtitle": "我們的計劃包括健康檢查、老年人訓練/工作坊、太極等。讓我們一起探索下面的內容。",
+    "story": "我們的故事",
+    "story_subtitle": "聆聽受益夥伴和我們的志工分享他們參與 ZAKKI 的經驗",
+    "news": "最新消息",
+    "news_subtitle": "隨時了解最新的行業動態、公司消息與重要事件，掌握全球趨勢，讓您不錯過任何關鍵資訊，保持資訊更新與前瞻",
     "donate": "捐款",
     "target": "目標",
     "team": "團隊",
@@ -80,5 +85,6 @@
     "donate_price": "金額",
     "cancel": "取消",
     "donate_submit": "捐款表單提交成功！",
-    "donate_submit_sub": "我們將會立即將轉帳帳戶資訊發送至您的電子郵件。"
+    "donate_submit_sub": "我們將會立即將轉帳帳戶資訊發送至您的電子郵件。",
+    "view_event": "了解活動"
 }

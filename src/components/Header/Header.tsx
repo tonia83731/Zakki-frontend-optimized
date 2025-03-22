@@ -31,6 +31,11 @@ export default function Header() {
       name: `${t("nav_join")}`,
       link: "/joinus",
     },
+    {
+      id: 5,
+      name: `${t("nav_news")}`,
+      link: "/news",
+    },
   ];
 
   const handleLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -83,6 +88,7 @@ export default function Header() {
               <li
                 key={nav.id}
                 className="py-2 hover:bg-green-800 md:hover:bg-transparent md:py-0"
+                onClick={() => setDropdownToggle(false)}
               >
                 <Link to={`${nav.link}`} className="">
                   {nav.name}

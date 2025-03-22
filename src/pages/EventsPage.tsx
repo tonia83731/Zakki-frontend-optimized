@@ -16,10 +16,8 @@ type DefaultEventProps = {
   slug: string;
   date: {
     date: string;
-    duration: {
-      start: string;
-      end: string;
-    };
+    start: string;
+    end: string;
   };
   location: string;
 };
@@ -65,7 +63,7 @@ export default function EventsPage() {
     const updated_order = defaultValue === "New" ? "desc" : "asc";
     try {
       const data =
-        await client.fetch(`*[_type == "event" && isRecommended != true && isPublished == true && title.${curr_lng} match "${searchValue}*"] | order(date[0].date ${updated_order}, order asc) [${firstIndex}...${lastIndex}] {
+        await client.fetch(`*[_type == "event" && is_recommended != true && is_published == true && title.${curr_lng} match "${searchValue}*"] | order(date[0].date ${updated_order}) [${firstIndex}...${lastIndex}] {
           "title": title.${curr_lng},
           "slug": slug.current,
           "date": date[0],
@@ -73,7 +71,7 @@ export default function EventsPage() {
         }`);
 
       const totals = await client.fetch(
-        `count(*[_type == "event" && isRecommended != true && isPublished == true && title.${curr_lng} match "${searchValue}*"])`
+        `count(*[_type == "event" && is_recommended != true && is_published == true && title.${curr_lng} match "${searchValue}*"])`
       );
       setEventData(data);
       setCurrentPage(1);
@@ -87,7 +85,7 @@ export default function EventsPage() {
     const updated_order = defaultValue === "New" ? "desc" : "asc";
     try {
       const data =
-        await client.fetch(`*[_type == "event" && isRecommended != true && isPublished == true && title.${curr_lng} match "${searchValue}*"] | order(date[0].date ${updated_order}, order asc) [${firstIndex}...${lastIndex}] {
+        await client.fetch(`*[_type == "event" && is_recommended != true && is_published == true && title.${curr_lng} match "${searchValue}*"] | order(date[0].item.date ${updated_order}) [${firstIndex}...${lastIndex}] {
           "title": title.${curr_lng},
           "slug": slug.current,
           "date": date[0],
@@ -95,7 +93,7 @@ export default function EventsPage() {
         }`);
 
       const totals = await client.fetch(
-        `count(*[_type == "event" && isRecommended != true && isPublished == true && title.${curr_lng} match "${searchValue}*"])`
+        `count(*[_type == "event" && is_recommended != true && is_published == true && title.${curr_lng} match "${searchValue}*"])`
       );
       setEventData(data);
       setCurrentPage(1);
@@ -113,15 +111,18 @@ export default function EventsPage() {
   };
 
   useEffect(() => {
-    const updated_order = defaultValue === "New" ? "desc" : "asc";
     const fetchRecommendEvent = async () => {
       try {
         const data = await client.fetch(
-          `*[_type == "event" && isRecommended == true && isPublished == true] | order(date[0].date ${updated_order}, order asc) {
+          `*[_type == "event" && is_recommended == true && is_published == true]{
                     "title": title.${curr_lng},
                     "slug": slug.current,
                     "image": image.asset->url,
-                    "date": date[0],
+                    date[0] {
+                      "date": item.date,
+                      "start": item.duration.start,
+                      "end": item.duration.end
+                    },
                     "location": location.${curr_lng}
                   }`
         );
@@ -131,7 +132,7 @@ export default function EventsPage() {
       }
     };
     fetchRecommendEvent();
-  }, [curr_lng, defaultValue]);
+  }, [curr_lng]);
 
   useEffect(() => {
     if (searchValue.length > 0) return;
@@ -139,10 +140,14 @@ export default function EventsPage() {
     const fetchEvents = async () => {
       try {
         const data = await client.fetch(
-          `*[_type == "event" && isPublished == true] | order(date[0].date ${updated_order}, order asc) [${firstIndex}...${lastIndex}] {
+          `*[_type == "event" && is_published == true] | order(date[0].item.date ${updated_order}) [${firstIndex}...${lastIndex}] {
                     "title": title.${curr_lng},
                     "slug": slug.current,
-                    "date": date[0],
+                    date[0] {
+                      "date": item.date,
+                      "start": item.duration.start,
+                      "end": item.duration.end
+                    },
                     "location": location.${curr_lng}
                   }`
         );
@@ -155,7 +160,7 @@ export default function EventsPage() {
     const fetchEventTotal = async () => {
       try {
         const programCount = await client.fetch(
-          `count(*[_type == "event" && isRecommended != true && isPublished == true])`
+          `count(*[_type == "event" && is_recommended != true && is_published == true])`
         );
         setTotal(programCount);
       } catch (error) {
@@ -190,8 +195,7 @@ export default function EventsPage() {
                           <IoIosTime />
                           <p className="w-fit truncate">
                             {dayjs(event.date?.date).format("YYYY-MM-DD")}{" "}
-                            {event.date.duration.start}~
-                            {event.date.duration.end}
+                            {event.date.start}~{event.date.end}
                           </p>
                         </div>
                         <div className="w-full flex justify-end">
@@ -237,8 +241,7 @@ export default function EventsPage() {
                           <IoIosTime />
                           <p className="w-fit truncate">
                             {dayjs(event.date?.date).format("YYYY-MM-DD")}{" "}
-                            {event.date.duration.start}~
-                            {event.date.duration.end}
+                            {event.date.start}~{event.date.end}
                           </p>
                         </div>
                         <div className="flex items-center gap-1">

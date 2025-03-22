@@ -8,11 +8,6 @@ import PageContainer from "../components/common/PageContainer";
 import { FaDonate } from "react-icons/fa";
 import { MdVolunteerActivism } from "react-icons/md";
 import { FaUsersLine } from "react-icons/fa6";
-import EmailIcon from "../assets/Img/social/email.png";
-import FacebookIcon from "../assets/Img/social/facebook.png";
-import InstagramIcon from "../assets/Img/social/instagram.png";
-import LinkedInIcon from "../assets/Img/social/linkedin.png";
-import TwitterIcon from "../assets/Img/social/twitter.png";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoIosTime } from "react-icons/io";
 import dayjs from "dayjs";
@@ -21,33 +16,34 @@ import DonateModal, {
 } from "../components/Main/Program/DonateModal";
 import Swal from "sweetalert2";
 
-type SocialType = "email" | "facebook" | "linkedin" | "instagram" | "twitter";
-
 type ProgramType = {
-  _id: string;
-  title: string;
-  intro: string;
-  image: string;
-  image2: string;
-  image3: string;
-  slug: string;
-  target: {
-    funding: number;
-    raised: number;
-  };
   team: {
-    contact: {
-      social: SocialType;
-      url: string;
-    }[];
-    job: string;
+    _id: string;
     name: string;
     image: string;
+    position: string;
+    contact: {
+      icon: string;
+      link: string;
+    }[];
   }[];
-  volunteer: number;
-  donar: number;
-  beneficiery: number;
-  updatedAt: string;
+  created_at: string;
+  title: string;
+  intro: string;
+  slug: string;
+  image: string;
+  multi_img: boolean;
+  images: {
+    src: string;
+  }[];
+  target: {
+    volunteer: number;
+    beneficiary: number;
+    progress: number;
+    donar: number;
+    goal: number;
+  };
+  _id: string;
 };
 
 type EventType = {
@@ -80,14 +76,7 @@ export default function ProgramPage() {
     email: "",
     price: 0,
   });
-
-  const socailMatch: Record<SocialType, string> = {
-    email: EmailIcon,
-    facebook: FacebookIcon,
-    linkedin: LinkedInIcon,
-    instagram: InstagramIcon,
-    twitter: TwitterIcon,
-  };
+  const [currentImg, setCurrentImg] = useState("");
 
   const handleDonationToggle = (title: string) => {
     setModalToggle({
@@ -120,40 +109,45 @@ export default function ProgramPage() {
     });
     handleDonateCancel();
   };
+  const handleImgClick = (src: string | undefined) => {
+    if (src) setCurrentImg(src);
+  };
 
   useEffect(() => {
     const fetchProgram = async () => {
       const data = await client.fetch(`*[
-          _type == "program"
+          _type == "programs"
           && slug.current == "${slug}"
-          && isPublished == true
+          && is_published == true
         ][0]{
         _id,
         "title": title.${curr_lng},
-          
-          "slug": slug.current,
+        "intro": intro.${curr_lng},
+        "slug": slug.current,
+        "image": image.asset->url,
+        multi_img,
+        images[] {
+          "src": image.asset->url,
+        },
+        target,
+        team[]->{
+          _id,
+          name,
           "image": image.asset->url,
-          "image2": image_2.asset->url,
-          "image3": image_3.asset->url,
-          target,
-          donar,
-          volunteer,
-          beneficiery,
-          "team": team[]{
-            "image": image.asset->url,
-            job,
-            name,
-            "contact": contact[]{
-              social,
-              url
-            }
-          },
-          updatedAt
+          "position": member_position->title.${curr_lng},
+          "contact": member_contact[]{
+            "icon": icon->icon.asset->url,
+            link
+          }
+        },
+        created_at,
+        _id
       }`);
-      // console.log(data);
       setProgramData(data);
+      setCurrentImg(data.image);
+      // console.log(data);
       if (data?.target) {
-        const progress = (data?.target.raised / data?.target.funding) * 100;
+        const progress = (data?.target.progress / data?.target.goal) * 100;
         const formate_progress = Math.floor(progress || 0);
         setProgress(formate_progress);
       }
@@ -161,7 +155,7 @@ export default function ProgramPage() {
     const fetchProgramEvents = async () => {
       try {
         const data = await client.fetch(`
-          *[_type == 'event' && relateSlug == "${slug}" && isPublished == true]|order(order asc) {
+          *[_type == 'event' && resource->slug.current == "${slug}" && is_published == true] {
             "title": title.${curr_lng},
             "slug": slug.current,
             "image": image.asset->url,
@@ -170,6 +164,7 @@ export default function ProgramPage() {
           }
           `);
         setEventsData(data);
+        console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -198,23 +193,42 @@ export default function ProgramPage() {
             </Link>
           </div>
           {/* image */}
-          <div className="grid grid-cols-[2fr_1fr] gap-4">
+          <div className="grid grid-cols-[2fr_120px] gap-4">
             <img
-              src={programData?.image}
+              src={currentImg}
               alt={`${programData?.title}-main`}
               className="w-full h-full object-cover"
             />
-            <div className="grid grid-rows-2 gap-4">
-              <img
-                src={programData?.image2}
-                alt={`${programData?.title}-side-1`}
-                className="w-full h-full object-cover"
-              />
-              <img
-                src={programData?.image3}
-                alt={`${programData?.title}-side-2`}
-                className="w-full h-full object-cover"
-              />
+            <div className="flex flex-col gap-4 overflow-y-auto h-full">
+              <button
+                className="w-[120px] h-[120px] opacity-60"
+                onClick={() => handleImgClick(programData?.image)}
+              >
+                <img
+                  src={programData?.image}
+                  alt={`${programData?.title}-main`}
+                  className="w-full h-full object-cover"
+                />
+              </button>
+              {programData?.multi_img &&
+                programData.images.length > 0 &&
+                programData.images.map(
+                  ({ src }: { src: string }, index: number) => {
+                    return (
+                      <button
+                        className="w-[120px] h-[120px] opacity-60"
+                        key={`${programData?.title}-sub-${index}`}
+                        onClick={() => handleImgClick(src)}
+                      >
+                        <img
+                          src={src}
+                          alt={`${programData?.title}-sub-${index}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    );
+                  }
+                )}
             </div>
           </div>
           {/* title & intro */}
@@ -232,7 +246,7 @@ export default function ProgramPage() {
             {/* progress */}
             <div className="w-full flex flex-col gap-1 items-start text-sm">
               <p>
-                {t("target")}: Rp {programData?.target.funding}
+                {t("target")}: Rp {programData?.target.goal}
               </p>
               <div className="w-full flex items-center gap-4">
                 <div className="w-full h-3 bg-slate-200 rounded-full relative">
@@ -248,16 +262,20 @@ export default function ProgramPage() {
               <div className="flex justify-between items-start gap-6 w-[80%] mx-auto">
                 <div className="flex flex-col gap-1 items-center">
                   <FaDonate className="text-4xl md:text-6xl" />
-                  <p className="fong-bold text-2xl">{programData?.donar}</p>
+                  <p className="fong-bold text-2xl">
+                    {programData?.target.donar}
+                  </p>
                 </div>
                 <div className="flex flex-col gap-1 items-center">
                   <MdVolunteerActivism className="text-4xl md:text-6xl" />
-                  <p className="fong-bold text-2xl">{programData?.volunteer}</p>
+                  <p className="fong-bold text-2xl">
+                    {programData?.target.volunteer}
+                  </p>
                 </div>
                 <div className="flex flex-col gap-1 items-center">
                   <FaUsersLine className="text-4xl md:text-6xl" />
                   <p className="fong-bold text-2xl">
-                    {programData?.beneficiery}
+                    {programData?.target.beneficiary}
                   </p>
                 </div>
               </div>
@@ -275,7 +293,7 @@ export default function ProgramPage() {
             <>
               {programData && programData?.team.length > 0 ? (
                 <>
-                  <div className="flex flex-col gap-4 md:grid md:grid-cols-2 lg:grid-cols-3">
+                  <div className="flex flex-col gap-4 sm:grid sm:grid-cols-2 xl:grid-cols-3">
                     {programData?.team.map((item) => {
                       return (
                         <div
@@ -290,16 +308,18 @@ export default function ProgramPage() {
                           <div className="flex flex-col gap-1 px-2 py-1">
                             <div>
                               <h5 className="font-bold text-lg">{item.name}</h5>
-                              <p className="text-sm text-dark_60">{item.job}</p>
+                              <p className="text-sm text-dark_60">
+                                {item.position}
+                              </p>
                             </div>
                             <div className="flex items-center justify-start gap-2">
-                              {item.contact.map((data) => {
+                              {item.contact.map((data, index) => {
                                 // console.log(data.social);
                                 return (
-                                  <a href={data.url} className="">
+                                  <a href={data.link} className="">
                                     <img
-                                      src={socailMatch[data.social]}
-                                      alt={`${item.name}-${data.social}`}
+                                      src={data.icon}
+                                      alt={`${item.name}-social-${index}`}
                                       className="w-6 h-6 object-contain"
                                     />
                                   </a>
@@ -327,37 +347,48 @@ export default function ProgramPage() {
                 <div className="w-full flex flex-col gap-2">
                   {eventsData.map((item, index) => {
                     return (
-                      <Link
-                        to={`/event/${item.slug}`}
+                      <div
                         key={item.slug}
-                        className={`sm:grid sm:grid-cols-[60px_1fr] sm:gap-4 w-full ${
+                        className={`sm:grid sm:grid-cols-[120px_1fr] sm:gap-4 w-full ${
                           index !== 0 &&
                           "border-t border-slate-300 py-1 sm:border-0 sm:py-0"
-                        }`}
+                        } hover:shadow-md`}
                       >
                         <img
                           src={item.image}
                           alt={item.title}
-                          className="w-[60px] h-[60px] aspect-square object-cover rounded-sm hidden sm:block"
+                          className="w-[120px] h-[120px] aspect-square object-cover rounded-sm hidden sm:block"
                         />
-                        <div className="flex flex-col gap-1">
-                          <h5 className="font-bold text-lg truncate w-full">
-                            {item.title}
-                          </h5>
-                          <div className="text-xs text-green-800 flex flex-col gap-0.5">
-                            <div className="flex items-center gap-1">
-                              <FaLocationDot />
-                              <p className="w-fit truncate">{item.location}</p>
-                            </div>
-                            <div className="flex items-center gap-1">
-                              <IoIosTime />
-                              <p className="w-fit truncate">
-                                {dayjs(item.date?.date).format("YYYY-MM-DD")}
-                              </p>
+                        <div className="flex flex-col justify-between py-2 pr-4">
+                          <div className="flex flex-col gap-1">
+                            <h5 className="font-bold text-lg truncate w-full">
+                              {item.title}
+                            </h5>
+                            <div className="text-xs text-green-800 flex flex-col gap-0.5">
+                              <div className="flex items-center gap-1">
+                                <FaLocationDot />
+                                <p className="w-fit truncate">
+                                  {item.location}
+                                </p>
+                              </div>
+                              <div className="flex items-center gap-1">
+                                <IoIosTime />
+                                <p className="w-fit truncate">
+                                  {dayjs(item.date?.date).format("YYYY-MM-DD")}
+                                </p>
+                              </div>
                             </div>
                           </div>
+                          <div className="w-full flex justify-end">
+                            <Link
+                              to={`/event/${item.slug}`}
+                              className="w-fit px-4 py-1 bg-primary text-white rounded-md hover:shadow-lg"
+                            >
+                              {t("view_event")}
+                            </Link>
+                          </div>
                         </div>
-                      </Link>
+                      </div>
                     );
                   })}
                 </div>
@@ -392,7 +423,7 @@ export default function ProgramPage() {
           {/* progress */}
           <div className="w-full flex flex-col gap-1 items-start text-sm">
             <p>
-              {t("target")}: Rp {programData?.target.funding}
+              {t("target")}: Rp {programData?.target.goal}
             </p>
             <div className="w-full flex items-center gap-4">
               <div className="w-full h-3 bg-slate-200 rounded-full relative">
@@ -408,15 +439,21 @@ export default function ProgramPage() {
             <div className="flex justify-between items-start gap-6 md:flex-col md:gap-4 md:justify-center md:items-center w-[80%] mx-auto">
               <div className="flex flex-col gap-1 items-center">
                 <FaDonate className="text-4xl md:text-6xl" />
-                <p className="fong-bold text-2xl">{programData?.donar}</p>
+                <p className="fong-bold text-2xl">
+                  {programData?.target.donar}
+                </p>
               </div>
               <div className="flex flex-col gap-1 items-center">
                 <MdVolunteerActivism className="text-4xl md:text-6xl" />
-                <p className="fong-bold text-2xl">{programData?.volunteer}</p>
+                <p className="fong-bold text-2xl">
+                  {programData?.target.volunteer}
+                </p>
               </div>
               <div className="flex flex-col gap-1 items-center">
                 <FaUsersLine className="text-4xl md:text-6xl" />
-                <p className="fong-bold text-2xl">{programData?.beneficiery}</p>
+                <p className="fong-bold text-2xl">
+                  {programData?.target.beneficiary}
+                </p>
               </div>
             </div>
           </div>

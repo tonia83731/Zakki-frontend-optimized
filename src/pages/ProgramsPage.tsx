@@ -12,7 +12,7 @@ type ProgramItemType = {
   title: string;
   slug: string;
   image: string;
-  updatedAt: string;
+  created_at: string;
 };
 
 export default function ProgramsPage() {
@@ -23,7 +23,7 @@ export default function ProgramsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [defaultValue, setDefaultValue] = useState("New");
   const [searchValue, setSearchValue] = useState("");
-  const recordsPerPage = 9;
+  const recordsPerPage = 12;
   const lastIndex = currentPage * recordsPerPage;
   const firstIndex = lastIndex - recordsPerPage;
   const nPage = Math.ceil(total / recordsPerPage);
@@ -49,11 +49,11 @@ export default function ProgramsPage() {
     const updated_order = defaultValue === "New" ? "desc" : "asc";
     try {
       const data =
-        await client.fetch(`*[_type == "program" && isPublished == true && title.${curr_lng} match "${searchValue}*"] | order(order asc, updatedAt ${updated_order}) [${firstIndex}...${lastIndex}] {
+        await client.fetch(`*[_type == "program" && isPublished == true && title.${curr_lng} match "${searchValue}*"] | order(created_at ${updated_order}) [${firstIndex}...${lastIndex}] {
           "title": title.${curr_lng},
           "slug": slug.current,
           "image": image.asset->url,
-          updatedAt
+          created_at
         }`);
 
       const totals = await client.fetch(
@@ -74,11 +74,11 @@ export default function ProgramsPage() {
     const updated_order = defaultValue === "New" ? "desc" : "asc";
     try {
       const data =
-        await client.fetch(`*[_type == "program" && isPublished == true && title.${curr_lng} match "${searchValue}*"] | order(order asc, updatedAt ${updated_order}) [${firstIndex}...${lastIndex}] {
+        await client.fetch(`*[_type == "program" && isPublished == true && title.${curr_lng} match "${searchValue}*"] | order(created_at ${updated_order}) [${firstIndex}...${lastIndex}] {
           "title": title.${curr_lng},
           "slug": slug.current,
           "image": image.asset->url,
-          updatedAt
+          created_at
         }`);
 
       const totals = await client.fetch(
@@ -102,11 +102,11 @@ export default function ProgramsPage() {
     const fetchProgram = async () => {
       try {
         const data = await client.fetch(
-          `*[_type == "program" && isPublished == true] | order(order asc, updatedAt ${updated_order}) [${firstIndex}...${lastIndex}] {
+          `*[_type == "programs" && is_published == true]| order(created_at ${updated_order})[${firstIndex}...${lastIndex}] {
                 "title": title.${curr_lng},
                 "slug": slug.current,
                 "image": image.asset->url,
-                updatedAt
+                created_at
               }`
         );
         setProgramData(data);
@@ -118,7 +118,7 @@ export default function ProgramsPage() {
     const fetchProgramTotal = async () => {
       try {
         const totalCount = await client.fetch(
-          `count(*[_type == "program" && isPublished == true])`
+          `count(*[_type == "programs" && is_published == true])`
         );
         setTotal(totalCount);
       } catch (error) {
@@ -161,7 +161,7 @@ export default function ProgramsPage() {
                         {item.title}
                       </h1>
                       <p className="text-sm">
-                        {dayjs(item.updatedAt).format("YYYY-MM-DD")}
+                        {dayjs(item.created_at).format("YYYY-MM-DD")}
                       </p>
                     </div>
                   </div>

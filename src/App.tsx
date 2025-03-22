@@ -11,6 +11,8 @@ import ProgramPage from "./pages/ProgramPage";
 import JoinUsPage from "./pages/JoinUsPage";
 import EventsPage from "./pages/EventsPage";
 import EventPage from "./pages/EventPage";
+import NewsPage from "./pages/NewsPage.tsx";
+import NewsItemPage from "./pages/NewsItemPage.tsx";
 import { FormProvider } from "./context/formContext.tsx";
 
 function App() {
@@ -28,6 +30,8 @@ function App() {
             <Route path="/joinus" element={<JoinUsPage />} />
             <Route path="/events" element={<EventsPage />} />
             <Route path="/events/:slug" element={<EventPage />} />
+            <Route path="/news" element={<NewsPage />} />
+            <Route path="/news/:slug" element={<NewsItemPage />} />
           </Routes>
           <Footer />
         </FormProvider>

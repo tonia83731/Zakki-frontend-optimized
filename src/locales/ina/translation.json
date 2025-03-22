@@ -2,6 +2,7 @@
     "nav_programs": "Program",
     "nav_events": "Acara",
     "nav_join": "Bergabung",
+    "nav_news": "Berita Terbaru",
     "about": "Tentang Kami",
     "about_description": "ZAKKI bertujuan untuk membantu orang lanjut usia secara finansial melalui zakat dan donasi. Dasar dari ZAKKI adalah pemahaman bahwa setiap orang memiliki hak yang sama untuk hidup dengan layak.",
     "about_elderly": "Lanjut Usia",
@@ -12,6 +13,10 @@
     "subscribe_btn": "Konfirmasi",
     "program": "Program Kami",
     "program_subtitle": "Program kami terdiri dari pemeriksaan kesehatan, pelatihan/workshop untuk lansia, tai chi, dan banyak lagi. Mari jelajahi di bawah ini.",
+    "news": "Berita Terbaru",
+    "news_subtitle": "Selalu dapatkan informasi terbaru mengenai tren industri, berita perusahaan, dan acara penting. Pantau tren global dan jangan lewatkan informasi kunci, tetap terinformasi dan berpikir ke depan.",
+    "story": "Cerita Kami",
+    "story_subtitle": "Dengarkan pengalaman mitra penerima manfaat dan relawan kami dalam berpartisipasi di ZAKKI",
     "donate": "Donasi",
     "target": "Target",
     "team": "Tim",
@@ -80,5 +85,6 @@
     "donate_price": "Harga",
     "cancel": "Batal",
     "donate_submit": "Formulir Donasi Berhasil Dikirim!",
-  "donate_submit_sub": "Kami akan segera mengirimkan informasi rekening transfer ke email Anda."
+  "donate_submit_sub": "Kami akan segera mengirimkan informasi rekening transfer ke email Anda.",
+  "view_event": "Lihat Acara"
 }

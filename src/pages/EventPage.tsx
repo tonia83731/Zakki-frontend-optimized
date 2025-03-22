@@ -1,11 +1,12 @@
 import { useTranslation } from "react-i18next";
 import PageContainer from "../components/common/PageContainer";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { client } from "../lib/sanity";
 import EventToggle from "../components/Main/Event/EventToggle";
 import Slider from "react-slick";
 import EventRecommendCard from "../components/Main/Event/EventCommentCard";
+import { MdDomain } from "react-icons/md";
 
 type EventProps = {
   _id: string;
@@ -13,7 +14,7 @@ type EventProps = {
   intro: string;
   slug: string;
   image: string;
-  applyUrl: string;
+  apply_url: string;
   date: {
     date: string;
     duration: {
@@ -21,14 +22,17 @@ type EventProps = {
       end: string;
     };
   }[];
+  resource: {
+    title: string;
+    slug: string;
+  };
   location: string;
   faq: {
     question: string;
     answer: string;
   }[];
   past: {
-    image: string;
-    comment: string;
+    content: string;
   }[];
 };
 
@@ -58,39 +62,40 @@ export default function EventPage() {
         const data = await client.fetch(`*[
                   _type == "event"
                   && slug.current == "${slug}"
-                  && isPublished == true
+                  && is_published == true
                 ][0]{
                   _id,
                   "title": title.${curr_lng},
                   "intro": intro.${curr_lng},
                   "slug": slug.current,
                   "image": image.asset->url,
-                  applyUrl,
-                  date,
-                  "location": location.${curr_lng},
-                  "faq": faq[] {
-                    "question": question.${curr_lng},
-                    "answer" : answer.${curr_lng}
+                  "resource": resource->{
+                    "title": title.${curr_lng},
+                    slug
                   },
-                  "past": past[] {
-                    "image": image.asset->url, 
-                    "comment": comment
+                  apply_url,
+                  date[] {
+                    "date": item.date,
+                    "start": item.duration.start,
+                    "end": item.duration.end,
+                  },
+                  "location": location.${curr_lng},
+                  faq[] {
+                    "question": items.question.${curr_lng},
+                    "answer": items.answer.${curr_lng}
+                  },
+                  past[] {
+                    "content": content
                   }
                 }`);
         setEventData(data);
-
+        console.log(data);
         const dates =
           data.date.length > 0
             ? data.date.map(
-                (d: {
-                  date: string;
-                  duration: {
-                    start: string;
-                    end: string;
-                  };
-                }) => ({
-                  label: `${d.date} ${d.duration.start} ~ ${d.duration.end}`,
-                  value: `${d.date} ${d.duration.start} ~ ${d.duration.end}`,
+                (d: { date: string; start: string; end: string }) => ({
+                  label: `${d.date} ${d.start} ~ ${d.end}`,
+                  value: `${d.date} ${d.start} ~ ${d.end}`,
                 })
               )
             : [];
@@ -104,23 +109,23 @@ export default function EventPage() {
     fetchEvent();
   }, [slug, curr_lng]);
 
-  console.log(eventData);
+  // console.log(eventData);
 
   return (
     <section className="pt-[45px] md:pt-[60px] pb-[60px]" id="event">
       <div className="bg-white shadow-lg rounded-b-[15px] md:rounded-b-[45px] pb-[60px]">
         <div className="flex flex-col gap-8 w-[90%] mx-auto">
           <div className="pt-[60px] flex items-center gap-2 text-dark_60 text-xs md:text-base">
-            <a href="/events" className="hover:font-medium hover:underline">
+            <Link to="/events" className="hover:font-medium hover:underline">
               {t("nav_events")}
-            </a>
+            </Link>
             <p>/</p>
-            <a
-              href={`/events/${slug}`}
+            <Link
+              to={`/events/${slug}`}
               className="hover:font-medium underline truncate"
             >
               {eventData?.title}
-            </a>
+            </Link>
           </div>
           <div className="flex flex-col gap-4 sm:grid sm:grid-cols-2 md:gap-8">
             <img
@@ -151,7 +156,7 @@ export default function EventPage() {
                 </select>
                 <a
                   target="_blank"
-                  href={eventData?.applyUrl}
+                  href={eventData?.apply_url}
                   className="px-4 py-2 bg-primary hover:bg-green-800 text-white rounded-md"
                 >
                   {t("apply")}
@@ -163,6 +168,14 @@ export default function EventPage() {
       </div>
       <PageContainer>
         <div className="flex flex-col gap-8">
+          {/* relation */}
+          <div className="flex items-center gap-2 text-primary">
+            <MdDomain />
+            <Link to={`/program/${eventData?.resource.slug}`}>
+              From Program{" "}
+              <span className="font-bold">{eventData?.resource.title}</span>
+            </Link>
+          </div>
           {/* faq */}
           <div className="bg-white shadow-lg rounded-xl">
             <h5 className="font-bold text-xl py-2 px-4 border-b border-l-slate-300">
@@ -192,7 +205,10 @@ export default function EventPage() {
                 <div className="bg-primary_20 text-green-800 shadow-lg rounded-lg px-4 py-4 h-full flex items-center">
                   {eventData.past.map((item, index) => {
                     return (
-                      <EventRecommendCard index={index} comment={item.image} />
+                      <EventRecommendCard
+                        index={index}
+                        comment={item.content}
+                      />
                     );
                   })}
                 </div>
@@ -205,7 +221,7 @@ export default function EventPage() {
                     return (
                       <EventRecommendCard
                         index={index}
-                        comment={item.comment}
+                        comment={item.content}
                       />
                     );
                   })}

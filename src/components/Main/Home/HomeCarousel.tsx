@@ -19,11 +19,7 @@ type CarouselItemType = {
   tag?: string;
   image: string;
   link: {
-    title: {
-      en: string;
-      ina: string;
-      zh: string;
-    };
+    title: string;
     url: string;
   }[];
 };
@@ -46,16 +42,20 @@ export default function HomeCarousel() {
     const fetchHome = async () => {
       try {
         const data = await client.fetch(
-          `*[_type == "home" && isPublished == true] | order(order asc){
+          `*[_type == "home" && isPublished == true] | order(orderRank){
             "title": title.${curr_lng},
             tag,
             "image": image.asset->url,
-            link,
+            link[]{
+              "title": guide.title.${curr_lng},
+              "url": guide.url
+            },
             order
           }`
         );
+
         setHomeItems(data);
-        console.log(data);
+        // console.log(data);
       } catch (error) {
         console.error("Sanity fetch error:", error);
       }
@@ -90,7 +90,7 @@ export default function HomeCarousel() {
                         key={`home-link-${index}`}
                         className="text-center"
                       >
-                        <CarouselBtn>{item.title[curr_lng]}</CarouselBtn>
+                        <CarouselBtn>{item.title}</CarouselBtn>
                       </Link>
                     );
                   })}

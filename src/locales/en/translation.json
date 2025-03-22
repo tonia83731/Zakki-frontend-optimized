@@ -2,6 +2,7 @@
     "nav_programs": "Programs",
     "nav_events": "Events",
     "nav_join": "Join Us",
+    "nav_news": "News",
     "about": "About Us",
     "about_description": "ZAKKI aims to help the elderly people financially through zakat and donation. ZAKKI’s foundation is based on the understanding that all people have the equal rights to have a decent life.",
     "about_elderly": "Elderly",
@@ -12,6 +13,10 @@
     "subscribe_btn": "Confirm",
     "program": "Our Program",
     "program_subtitle": "Our program consists of healthcare check-up, elderly training/workshops, tai chi, and many more. Let’s explore below.",
+    "news": "Latest News",
+    "news_subtitle": "Stay updated with the latest industry trends, company news, and important events. Keep track of global trends and never miss key information, staying informed and forward-thinking.",
+    "story": "Our Stories",
+    "story_subtitle": "Listen to the beneficiary partner and our volunteers about their ZAKKI participate experience",
     "donate": "Donate",
     "target": "Target",
     "team": "Teams",
@@ -80,5 +85,6 @@
     "donate_price": "Price",
     "cancel" : "Cancel",
     "doate_submit": "Donate Form Submitted Successfully!",
-    "donate_submit_sub": "We will promptly send the transfer account details to your email."
+    "donate_submit_sub": "We will promptly send the transfer account details to your email.",
+    "view_event": "View Event"
 }

@@ -14,7 +14,7 @@ const EventToggle = ({
         onClick={() => setToggle(!toggle)}
         className="w-full flex items-center gap-4 justify-between"
       >
-        <div className="text-base font-bold">{question}</div>
+        <div className="text-base font-bold text-start">{question}</div>
         <div className={`transition-all ${toggle && "rotate-180"}`}>
           <IoIosArrowDown />
         </div>
