@@ -17,7 +17,7 @@ Presently, ZAKKI has made the decision to redesign its website with the aim of g
 ## Demo
 
 - Phase One visit [here](https://tonia83731.github.io/ZAKKI-vite/)
-- Phase Two visit [here](https://tonia83731.github.io/Zakki-frontend-optimized/)
+- Phase Two visit [here](https://zakki-frontend-optimized.vercel.app/)
 
 # Project Improvement
 
