@@ -6,10 +6,12 @@ import PageContainer from "../components/common/PageContainer";
 import { PageTitle } from "../components/common/PageTitle";
 import dayjs from "dayjs";
 import { Pagination } from "../components/common/Pagination";
+import Loading from "../components/common/Loading";
 
 export default function NewsPage() {
   const { t, i18n } = useTranslation();
   const curr_lng = i18n.language as "en" | "ina" | "zh";
+  const [isLoading, setIsLoading] = useState(false);
   const [newsData, setNewsData] = useState<
     {
       title: string;
@@ -41,6 +43,7 @@ export default function NewsPage() {
   useEffect(() => {
     const fetchNews = async () => {
       try {
+        setIsLoading(true);
         const data =
           await client.fetch(`*[_type == "news" && is_published == true && locale == "${curr_lng}"] [${firstIndex}...${lastIndex}] {
           title,
@@ -48,6 +51,7 @@ export default function NewsPage() {
           "image": image.asset->url,
           published_at
         }`);
+        setIsLoading(false);
 
         setNewsData(data);
       } catch (error) {
@@ -67,7 +71,7 @@ export default function NewsPage() {
     fetchNews();
     fetchNewsTotal();
   }, [curr_lng, currentPage]);
-
+  if (isLoading) return <Loading />;
   return (
     <section id="me">
       <PageContainer>

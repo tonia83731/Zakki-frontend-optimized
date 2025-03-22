@@ -5,7 +5,7 @@ import Subscribe from "../components/Main/Subscribe";
 export default function HomePage() {
   return (
     <>
-      <section className="pt-[30px] md:pt-[45px]" id="home-carousel">
+      <section className="" id="home-carousel">
         <HomeCarousel />
       </section>
       <AboutUs />

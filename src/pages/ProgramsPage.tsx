@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import Search from "../components/Main/Program/Search";
 import PageContainer from "../components/common/PageContainer";
+import Loading from "../components/common/Loading";
 
 type ProgramItemType = {
   title: string;
@@ -18,6 +19,7 @@ type ProgramItemType = {
 export default function ProgramsPage() {
   const { t, i18n } = useTranslation();
   const curr_lng = i18n.language as "en" | "ina" | "zh";
+  const [isLoading, setIsLoading] = useState(false);
   const [programData, setProgramData] = useState<ProgramItemType[]>([]);
   const [total, setTotal] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -48,6 +50,7 @@ export default function ProgramsPage() {
     if (searchValue.length === 0) return;
     const updated_order = defaultValue === "New" ? "desc" : "asc";
     try {
+      setIsLoading(true);
       const data =
         await client.fetch(`*[_type == "program" && isPublished == true && title.${curr_lng} match "${searchValue}*"] | order(created_at ${updated_order}) [${firstIndex}...${lastIndex}] {
           "title": title.${curr_lng},
@@ -59,6 +62,7 @@ export default function ProgramsPage() {
       const totals = await client.fetch(
         `count(*[_type == "program" && isPublished == true && title.${curr_lng} match "${searchValue}*"])`
       );
+      setIsLoading(false);
       setCurrentPage(1);
       setProgramData(data);
       setTotal(totals);
@@ -73,6 +77,7 @@ export default function ProgramsPage() {
     if (searchValue.length === 0) return;
     const updated_order = defaultValue === "New" ? "desc" : "asc";
     try {
+      setIsLoading(true);
       const data =
         await client.fetch(`*[_type == "program" && isPublished == true && title.${curr_lng} match "${searchValue}*"] | order(created_at ${updated_order}) [${firstIndex}...${lastIndex}] {
           "title": title.${curr_lng},
@@ -84,6 +89,7 @@ export default function ProgramsPage() {
       const totals = await client.fetch(
         `count(*[_type == "program" && isPublished == true && title.${curr_lng} match "${searchValue}*"])`
       );
+      setIsLoading(false);
       setCurrentPage(1);
       setProgramData(data);
       setTotal(totals);
@@ -101,6 +107,7 @@ export default function ProgramsPage() {
     const updated_order = defaultValue === "New" ? "desc" : "asc";
     const fetchProgram = async () => {
       try {
+        setIsLoading(true);
         const data = await client.fetch(
           `*[_type == "programs" && is_published == true]| order(created_at ${updated_order})[${firstIndex}...${lastIndex}] {
                 "title": title.${curr_lng},
@@ -109,9 +116,11 @@ export default function ProgramsPage() {
                 created_at
               }`
         );
+        setIsLoading(false);
         setProgramData(data);
         // console.log(data);
       } catch (error) {
+        setIsLoading(false);
         console.error("Sanity fetch error:", error);
       }
     };
@@ -128,6 +137,8 @@ export default function ProgramsPage() {
     fetchProgram();
     fetchProgramTotal();
   }, [curr_lng, currentPage, defaultValue, searchValue]);
+
+  if (isLoading) return <Loading />;
   return (
     <main>
       <PageContainer>

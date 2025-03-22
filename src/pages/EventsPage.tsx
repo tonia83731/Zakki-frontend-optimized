@@ -10,6 +10,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { client } from "../lib/sanity";
 import { Link } from "react-router-dom";
+import Loading from "../components/common/Loading";
 
 type DefaultEventProps = {
   title: string;
@@ -29,6 +30,7 @@ type RecommendEventProps = DefaultEventProps & {
 export default function EventsPage() {
   const { t, i18n } = useTranslation();
   const curr_lng = i18n.language as "en" | "ina" | "zh";
+  const [isLoading, setIsLoading] = useState(false);
   const [recommendEvent, setRecommendEvent] = useState<RecommendEventProps[]>(
     []
   );
@@ -62,6 +64,7 @@ export default function EventsPage() {
     if (searchValue.length === 0) return;
     const updated_order = defaultValue === "New" ? "desc" : "asc";
     try {
+      setIsLoading(true);
       const data =
         await client.fetch(`*[_type == "event" && is_recommended != true && is_published == true && title.${curr_lng} match "${searchValue}*"] | order(date[0].date ${updated_order}) [${firstIndex}...${lastIndex}] {
           "title": title.${curr_lng},
@@ -73,6 +76,7 @@ export default function EventsPage() {
       const totals = await client.fetch(
         `count(*[_type == "event" && is_recommended != true && is_published == true && title.${curr_lng} match "${searchValue}*"])`
       );
+      setIsLoading(false);
       setEventData(data);
       setCurrentPage(1);
       setTotal(totals);
@@ -84,6 +88,7 @@ export default function EventsPage() {
     if (searchValue.length === 0) return;
     const updated_order = defaultValue === "New" ? "desc" : "asc";
     try {
+      setIsLoading(true);
       const data =
         await client.fetch(`*[_type == "event" && is_recommended != true && is_published == true && title.${curr_lng} match "${searchValue}*"] | order(date[0].item.date ${updated_order}) [${firstIndex}...${lastIndex}] {
           "title": title.${curr_lng},
@@ -95,6 +100,7 @@ export default function EventsPage() {
       const totals = await client.fetch(
         `count(*[_type == "event" && is_recommended != true && is_published == true && title.${curr_lng} match "${searchValue}*"])`
       );
+      setIsLoading(false);
       setEventData(data);
       setCurrentPage(1);
       setTotal(totals);
@@ -139,6 +145,7 @@ export default function EventsPage() {
     const updated_order = defaultValue === "New" ? "desc" : "asc";
     const fetchEvents = async () => {
       try {
+        setIsLoading(true);
         const data = await client.fetch(
           `*[_type == "event" && is_published == true] | order(date[0].item.date ${updated_order}) [${firstIndex}...${lastIndex}] {
                     "title": title.${curr_lng},
@@ -151,6 +158,7 @@ export default function EventsPage() {
                     "location": location.${curr_lng}
                   }`
         );
+        setIsLoading(false);
         setEventData(data);
       } catch (error) {
         console.error("Sanity fetch error:", error);
@@ -170,6 +178,7 @@ export default function EventsPage() {
     fetchEvents();
     fetchEventTotal();
   }, [curr_lng, currentPage, defaultValue, searchValue]);
+  if (isLoading) return <Loading />;
   return (
     <main>
       <PageContainer>
