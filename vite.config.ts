@@ -15,4 +15,9 @@ export default defineConfig({
       include: "**/*.svg",
     }),
   ],
+  server: {
+    // host: true,
+    // strictPort: true,
+    port: 8080,
+  },
 });
