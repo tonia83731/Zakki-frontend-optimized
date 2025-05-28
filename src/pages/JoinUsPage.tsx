@@ -103,9 +103,9 @@ export default function JoinUsPage() {
     <PageContainer>
       <section
         id="join-us"
-        className="min-h-[calc(100vh-80px)] py-[60px] lg:py-8 flex flex-col gap-8 lg:grid lg:grid-cols-[300px_1fr]"
+        className="min-h-[calc(100vh-80px)] py-[60px] md:min-h-auto md:min-h-[calc(100vh-6rem)] lg:py-8 flex flex-col gap-8 lg:grid lg:grid-cols-[300px_1fr]"
       >
-        <div className="h-[240px] flex flex-nowrap items-center gap-4 w-full overflow-x-auto lg:flex-col lg:justify-start lg:items-center lg:h-full lg:w-[300px] lg:overflow-x-hidden lg:overflow-y-auto lg:pr-2">
+        <div className="h-[240px] flex flex-nowrap items-center gap-4 w-full overflow-x-auto lg:flex-col lg:justify-start lg:items-center lg:h-full lg:max-h-[calc(100vh-6rem)] lg:w-[300px] lg:overflow-x-hidden lg:overflow-y-auto lg:pr-2">
           {jobsData.map((job) => {
             return (
               <JobCard
