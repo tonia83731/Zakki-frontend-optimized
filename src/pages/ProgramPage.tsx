@@ -316,7 +316,7 @@ export default function ProgramPage() {
                               {item.contact.map((data, index) => {
                                 // console.log(data.social);
                                 return (
-                                  <a href={data.link} className="">
+                                  <a href={data.link} key={data.link} className="">
                                     <img
                                       src={data.icon}
                                       alt={`${item.name}-social-${index}`}

@@ -197,8 +197,8 @@ export default function EventPage() {
           <div className="flex flex-col gap-4">
             <h5 className="font-bold text-xl px-4">{t("past_comment")}</h5>
             <div>
-              {!eventData ? (
-                <div className="w-full text-center text-slate-200 py-2">
+              {!eventData || !eventData.past ? (
+                <div className="w-full text-center text-dark_60 py-2">
                   {t("no_content")}
                 </div>
               ) : eventData.past.length === 1 ? (
@@ -208,6 +208,7 @@ export default function EventPage() {
                       <EventRecommendCard
                         index={index}
                         comment={item.content}
+                        key={`event-${index}`}
                       />
                     );
                   })}
@@ -220,6 +221,7 @@ export default function EventPage() {
                   {eventData.past.map((item, index) => {
                     return (
                       <EventRecommendCard
+                        key={`event-${index}`}
                         index={index}
                         comment={item.content}
                       />

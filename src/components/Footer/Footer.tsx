@@ -62,7 +62,7 @@ export default function Footer() {
     },
   ];
   return (
-    <footer className="bg-neutral_80 text-white w-full mt-auto">
+    <footer className="bg-neutral_80 text-white w-full h-full mt-auto">
       <div className="py-[40px] px-[24px] max-w-[1200px] mx-auto flex flex-col gap-4 md:flex-row md:justify-between">
         <div className="hidden md:block">
           <FooterLogoIcon />
