@@ -21,7 +21,6 @@ function App() {
       <HashRouter>
         <FormProvider>
           <Header />
-          <div className="">Hello</div>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/stories" element={<StoriesPage />} />

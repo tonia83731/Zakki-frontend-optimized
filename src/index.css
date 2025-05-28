@@ -169,3 +169,13 @@ input:invalid {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/* Default: non-centered slides are dimmed */
+.slide-wrapper {
+  opacity: 0.5;
+}
+
+/* Center/current slide stays bright */
+.slick-center .slide-wrapper {
+  opacity: 1;
+}
