@@ -381,7 +381,7 @@ export default function ProgramPage() {
                           </div>
                           <div className="w-full flex justify-end">
                             <Link
-                              to={`/event/${item.slug}`}
+                              to={`/events/${item.slug}`}
                               className="w-fit px-4 py-1 bg-primary text-white rounded-md hover:shadow-lg"
                             >
                               {t("view_event")}
