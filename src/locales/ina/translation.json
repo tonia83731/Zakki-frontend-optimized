@@ -85,6 +85,7 @@
     "donate_price": "Harga",
     "cancel": "Batal",
     "donate_submit": "Formulir Donasi Berhasil Dikirim!",
-  "donate_submit_sub": "Kami akan segera mengirimkan informasi rekening transfer ke email Anda.",
-  "view_event": "Lihat Acara"
+    "donate_submit_sub": "Kami akan segera mengirimkan informasi rekening transfer ke email Anda.",
+    "view_event": "Lihat Acara",
+    "learn_more": "Pelajari lebih lanjut"
 }
