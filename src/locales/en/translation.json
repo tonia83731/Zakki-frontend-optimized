@@ -87,5 +87,10 @@
     "doate_submit": "Donate Form Submitted Successfully!",
     "donate_submit_sub": "We will promptly send the transfer account details to your email.",
     "view_event": "View Event",
-    "learn_more": "Learn More"
+    "learn_more": "Learn More",
+    "statistic_volunteer_engaged": "Volunteers Engaged",
+    "statistic_donations_processed": "Donations Processed",
+    "statistic_community_events_hosted": "Community Events Hosted",
+    "statistic_people_supported": "People Supported",
+    "statistic_volunteer_hours_logged": "Volunteer Hours Logged"
 }

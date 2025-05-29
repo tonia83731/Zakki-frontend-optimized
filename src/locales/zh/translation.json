@@ -87,5 +87,10 @@
     "donate_submit": "捐款表單提交成功！",
     "donate_submit_sub": "我們將會立即將轉帳帳戶資訊發送至您的電子郵件。",
     "view_event": "了解活動",
-    "learn_more": "了解更多"
+    "learn_more": "了解更多",
+    "statistic_volunteer_engaged": "名志工參與",
+    "statistic_donations_processed": "筆捐款處理",
+    "statistic_community_events_hosted": "場社區活動舉辦",
+    "statistic_people_supported": "人次獲得支援",
+    "statistic_volunteer_hours_logged": "小時志工服務時數"
 }
