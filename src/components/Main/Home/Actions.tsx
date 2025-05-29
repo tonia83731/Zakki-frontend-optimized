@@ -27,8 +27,8 @@ export default function Actions() {
     return <section id="actions" className="bg-neutral_20 mt-12 md:mt-16">
         <div className="w-full max-w-[1200px] mx-auto px-4 md:px-8 py-12 flex flex-col gap-6 md:grid md:grid-cols-[1.5fr_4fr] md:gap-10">
             <div className="flex flex-col gap-4">
-                <h4 className="font-bold text-xl text-dark font-poppins">By the Numbers...</h4>
-                <div className="hidden md:block text-sm">Our journey so far — measurable milestones that showcase the collective impact of volunteers, donors, and supporters.</div>
+                <h4 className="font-bold text-xl text-dark font-poppins">{t("statistic_title")}</h4>
+                <div className="hidden md:block text-sm">{t("statistic_text")}</div>
             </div>
             <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-4">
                 {
