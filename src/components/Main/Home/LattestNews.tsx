@@ -40,7 +40,7 @@ const LattestNews = () => {
                   }
         }
         fetchNews()
-    }, [])
+    }, [curr_lng])
     return <section id="lattest-news">
         <PageContainer>
             <div className="flex flex-col gap-8">
