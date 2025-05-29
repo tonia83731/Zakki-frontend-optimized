@@ -48,18 +48,18 @@ const LattestNews = () => {
                 {t("news")}
                 </div>
                 <div className="md:grid md:grid-cols-2 md:gap-6">
-                    <div className="hidden md:flex flex-col gap-2">
+                    <Link to={`/news/${mainNews?.slug}`} className="hidden md:flex flex-col gap-2 group hover:bg-primary_20">
                         <img src={mainNews?.image} alt={mainNews?.title} className="w-full h-[210px] object-cover" />
-                        <div className="">
+                        <div className="group-hover:px-2 pb-2">
                             <h4 className="font-bold text-lg">{mainNews?.title}</h4>
                             <div className="text-sm">{mainNews?.introduction}</div>
                         </div>
-                    </div>
+                    </Link>
                     <div className="flex flex-col gap-2">
                         {
                             topNews.map((news, idx) => {
                                 if (idx === 0) return
-                                return <Link to={`/news/${news.slug}`} className={`grid grid-cols-[3fr_1fr] gap-2 py-2 ${idx !== 1 && 'border-t border-dark_20'}`} key={news.title}>
+                                return <Link to={`/news/${news.slug}`} className={`grid grid-cols-[3fr_1fr] gap-2 py-2 ${idx !== 1 && 'border-t border-dark_20'} hover:bg-primary_20 hover:px-2`} key={news.title}>
                                     <div className="">
                                         <p className="text-sm text-error font-bold ">Top {idx}</p>
                                         <h4 className="font-bold text-lg">{news.title}</h4>
