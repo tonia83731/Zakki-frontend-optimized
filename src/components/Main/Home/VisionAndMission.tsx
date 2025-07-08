@@ -1,9 +1,14 @@
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import PageContainer from "../../common/PageContainer"
+import { IoIosArrowDown } from "react-icons/io";
 import { FaRegEye } from "react-icons/fa";
 import { LuListTodo } from "react-icons/lu";
+import VisionMisionImg from "../../../assets/Img/Home/vissionmission.jpg"
+
 const VisionAndMission = () => {
     const { t } = useTranslation();
+    const [typeToggle, setTypeToggle] = useState<'vision' | 'mission'>('vision')
     const vision_datas = [
         t("vision_opt_1"),
         t("vision_opt_2")
@@ -25,32 +30,59 @@ const VisionAndMission = () => {
                     {t("vision_and_mission")}
                     </div>
                 </div>
-                <div className="flex flex-col gap-4 md:grid md:grid-cols-2 md:gap-6">
-                    <div className="bg-white rounded-lg px-4 py-6 shadow-lg flex flex-col gap-4">
-                    <div className="flex items-center gap-4 font-bold text-primary text-lg md:text-2xl">
-                            <FaRegEye />
-                            <h5>VISION</h5>
-                        </div>
-                        <ol className="text-sm list-outside list-decimal pl-4 flex flex-col gap-1">
+                <div className="md:grid md:grid-cols-[2fr_1fr] md:gap-6 items-center">
+                    <div className="flex flex-col gap-2">
+                        <div className="bg-white rounded-lg px-4 py-6 shadow-lg flex flex-col gap-4">
+                            {/* header */}
+                            <button
+                                onClick={() => setTypeToggle('vision')}
+                                className="text-lg flex justify-between items-center">
+                                <div className="flex items-center gap-4 font-bold text-primary md:text-2xl">
+                                    <FaRegEye />
+                                    <h5>VISION</h5>
+                                </div>
+                                <div className={`text-neutral_90 ${typeToggle === 'vision' && "rotate-180"}`}>
+                                    <IoIosArrowDown />
+                                </div>
+                            </button>
                             {
-                                vision_datas.map((v, idx) => {
-                                    return <li key={`vision-${idx}`}>{v}</li>
-                                })
+                                typeToggle === 'vision' && <ol className="text-sm list-outside list-decimal pl-4 flex flex-col gap-1">
+                                {
+                                    vision_datas.map((v, idx) => {
+                                        return <li key={`vision-${idx}`}>{v}</li>
+                                    })
+                                }
+                            </ol>
                             }
-                        </ol>
+                        </div>
+                        <div className="bg-white rounded-lg px-4 py-6 shadow-lg flex flex-col gap-4">
+                            {/* header */}
+                            <button
+                                onClick={() => setTypeToggle('mission')}
+                                className="text-lg flex justify-between items-center">
+                                <div className="flex items-center gap-4 font-bold text-primary text-lg md:text-2xl">
+                                    <LuListTodo />
+                                    <h5>MISSION</h5>
+                                </div>
+                                <div className={`text-neutral_90 ${typeToggle === 'mission' && "rotate-180"}`}>
+                                    <IoIosArrowDown />
+                                </div>
+                            </button>
+                            {
+                                typeToggle === 'mission' && <ol className="text-sm list-outside list-decimal pl-4 flex flex-col gap-1">
+                                {
+                                    mission_datas.map((v, idx) => {
+                                        return <li key={`mission-${idx}`}>{v}</li>
+                                    })
+                                }
+                            </ol>
+                            }
+                        </div>
                     </div>
-                    <div className="bg-white rounded-lg px-4 py-6 shadow-lg flex flex-col gap-4">
-                        <div className="flex items-center gap-4 font-bold text-primary text-lg md:text-2xl">
-                            <LuListTodo />
-                            <h5> MISSION</h5>
-                        </div>
-                        <ol className="text-sm list-outside list-decimal pl-4 flex flex-col gap-1">
-                            {
-                                mission_datas.map((m, idx) => {
-                                    return <li key={`mission-${idx}`}>{m}</li>
-                                })
-                            }
-                        </ol>
+                    <div className="hidden md:block">
+                    <blockquote className="text-xl italic font-light text-green_focus">
+                        “&nbsp;Empowering lives through inclusive technology, transparent giving, and community-driven care—building a resilient, equitable Indonesia where every generation thrives.&nbsp;”
+                    </blockquote>
                     </div>
                 </div>
             </div>
