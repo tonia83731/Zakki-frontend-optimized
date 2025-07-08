@@ -3,6 +3,7 @@ import AboutUs from "../components/Main/Home/AboutUs";
 import Actions from "../components/Main/Home/Actions";
 import Subscribe from "../components/Main/Subscribe";
 import LattestNews from "../components/Main/Home/LattestNews";
+import VisionAndMission from "../components/Main/Home/VisionAndMission";
 
 export default function HomePage() {
   return (
@@ -12,6 +13,7 @@ export default function HomePage() {
       </section>
       <AboutUs />
       <Actions />
+      <VisionAndMission />
       <LattestNews />
       <br />
       <Subscribe />
