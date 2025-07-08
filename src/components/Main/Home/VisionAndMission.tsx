@@ -1,10 +1,9 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import PageContainer from "../../common/PageContainer"
 import { IoIosArrowDown } from "react-icons/io";
 import { FaRegEye } from "react-icons/fa";
 import { LuListTodo } from "react-icons/lu";
-import VisionMisionImg from "../../../assets/Img/Home/vissionmission.jpg"
 
 const VisionAndMission = () => {
     const { t } = useTranslation();
